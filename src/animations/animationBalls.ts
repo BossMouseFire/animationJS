@@ -28,9 +28,10 @@ export default class AnimationBalls extends Animation {
     }
 
     public animation(): void {
-        requestAnimationFrame(this.animation)
+        requestAnimationFrame(() => this.animation())
         this.clearCanvas()
         this.listBalls.forEach(ball => {
+            console.log(ball, this.canvas.height, this.context)
             ball.update(this.canvas.height, this.context)
         })
     }

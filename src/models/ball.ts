@@ -22,7 +22,6 @@ export default class Ball extends Model {
     }
 
     public update(height: number, context: CanvasRenderingContext2D) {
-        console.log('test')
         if (super.wrapDevicePixelRation(this.y + this.radius) >= height) {
             this.dy = -this.dy * this.frictionY
         }
@@ -32,7 +31,6 @@ export default class Ball extends Model {
         else {
             this.dy += this.gravity
         }
-
         this.dx = this.dx * this.frictionX
 
         this.y += this.dy
