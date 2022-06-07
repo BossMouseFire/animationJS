@@ -1,7 +1,7 @@
 import Model from "./model";
 
 
-export default class Ball extends Model {
+export default class Ball implements Model {
     public x: number;
     public y: number;
     public dy: number;
@@ -14,7 +14,6 @@ export default class Ball extends Model {
 
     constructor(x: number, y: number,
                 radius: number, color: string, angle: number, speed: number, mass: number) {
-        super();
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -26,17 +25,17 @@ export default class Ball extends Model {
     }
 
     public update(width: number, height: number, context: CanvasRenderingContext2D) {
-        if (super.wrapDevicePixelRation(this.y + this.radius) > height) {
-            this.speed = this.speed * this.friction
+        if (Model.wrapDevicePixelRation(this.y + this.radius) > height) {
+            this.speed = this.speed * Model.friction
         }
 
-        if (super.wrapDevicePixelRation(this.x + this.radius) > width
-            || super.wrapDevicePixelRation(this.x - this.radius) < 0) {
+        if (Model.wrapDevicePixelRation(this.x + this.radius) > width
+            || Model.wrapDevicePixelRation(this.x - this.radius) < 0) {
             this.angle = 180 - this.angle;
             this.changeUnits();
         } else if (
-            super.wrapDevicePixelRation(this.y + this.radius) > height
-            || super.wrapDevicePixelRation(this.y - this.radius) < 0) {
+            Model.wrapDevicePixelRation(this.y + this.radius) > height
+            || Model.wrapDevicePixelRation(this.y - this.radius) < 0) {
             this.angle = 360 - this.angle;
             this.changeUnits();
         }
@@ -54,9 +53,9 @@ export default class Ball extends Model {
     public draw(context: CanvasRenderingContext2D) {
         context.beginPath()
         context.arc(
-            super.wrapDevicePixelRation(this.x),
-            super.wrapDevicePixelRation(this.y),
-            super.wrapDevicePixelRation(this.radius),
+            Model.wrapDevicePixelRation(this.x),
+            Model.wrapDevicePixelRation(this.y),
+            Model.wrapDevicePixelRation(this.radius),
             0,
             2 * Math.PI
         )

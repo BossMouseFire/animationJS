@@ -2,23 +2,22 @@ import Animation from "./animation";
 import Ball from "../models/ball";
 
 
-export default class AnimationBalls extends Animation {
+export default class AnimationBalls implements Animation {
 
     private listBalls: Ball[] = [];
     private readonly countBalls: number;
 
     constructor(countBalls) {
-        super();
         this.countBalls = countBalls;
         this.init();
     }
 
-    protected init(): void {
-        super.init()
+    public init(): void {
+        Animation.setSize()
         for (let i = 0; i < this.countBalls; i++) {
-            const x = Math.random() * this.canvas.width / 2 + 10
-            const y = Math.random() * this.canvas.height / 2 + 10
-            const radius = Math.random() * 25 + 5
+            const x = Math.random() * Animation.canvas.width / 2 + 10
+            const y = Math.random() * Animation.canvas.height / 2 + 10
+            const radius = Math.random() * 5 + 2
             const color = `rgb(${Math.random() * 255 + 10}, ${Math.random() * 255 + 10}, ${Math.random() * 255 + 10})`
             const angle = Math.random() * 70 + 10
             const speed = Math.random() * 5 + 1
@@ -30,9 +29,9 @@ export default class AnimationBalls extends Animation {
 
     public animation(): void {
         requestAnimationFrame(() => this.animation())
-        this.clearCanvas()
+        Animation.clearCanvas()
         this.listBalls.forEach(ball => {
-            ball.update(this.canvas.width, this.canvas.height, this.context)
+            ball.update(Animation.canvas.width, Animation.canvas.height, Animation.context)
         })
 
     }

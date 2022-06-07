@@ -1,29 +1,27 @@
 
-export default class Animation {
+export default abstract class Animation {
 
-    protected canvas: HTMLCanvasElement = document.querySelector('canvas');
-    protected context: CanvasRenderingContext2D = this.canvas.getContext('2d');
+    public static canvas: HTMLCanvasElement = document.querySelector('canvas');
+    public static context: CanvasRenderingContext2D = this.canvas.getContext('2d');
 
-    protected clearCanvas() {
-        this.canvas.width = this.canvas.width;
+    public static clearCanvas() {
+        Animation.canvas.width = Animation.canvas.width;
     }
 
-    private setSize() {
-        let rect = this.canvas.getBoundingClientRect();
+    public static setSize() {
+        let rect = Animation.canvas.getBoundingClientRect();
 
-        this.canvas.width = rect.width * devicePixelRatio;
-        this.canvas.height = rect.height * devicePixelRatio;
+        Animation.canvas.width = rect.width * devicePixelRatio;
+        Animation.canvas.height = rect.height * devicePixelRatio;
 
-        this.context.scale(devicePixelRatio, devicePixelRatio);
+        Animation.context.scale(devicePixelRatio, devicePixelRatio);
 
-        this.canvas.style.width = rect.width + 'px';
-        this.canvas.style.height = rect.height + 'px';
+        Animation.canvas.style.width = rect.width + 'px';
+        Animation.canvas.style.height = rect.height + 'px';
     }
 
-    protected init(): void {
-        this.setSize()
-    }
+    public abstract init(): void
 
-    public animation(): void {}
+    public abstract animation(): void
 
 }
